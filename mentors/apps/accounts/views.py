@@ -1,9 +1,14 @@
 from django.contrib.auth import login
-from django.shortcuts import redirect
-from django.views.generic import CreateView
+from django.shortcuts import redirect, render
+from django.views.generic import CreateView, DetailView
+from django.views.generic.base import View
 
 from .forms import StudentSignUpForm, TeacherSignUpForm
-from .models import User
+from .models import User, Teacher, Student
+
+
+def index(request):
+    return render(request, 'index.html')
 
 
 class SignUpView(CreateView):
@@ -43,3 +48,7 @@ class TeacherSignUpView(CreateView):
         login(self.request, user)
         return redirect('categories')
 
+
+class TeacherDetailView(DetailView):
+    model = Teacher
+    template_name = 'accounts/teacher_detail.html'

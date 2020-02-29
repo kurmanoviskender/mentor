@@ -1,0 +1,11 @@
+{% extends 'index.html' %}
+
+{% block content %}
+
+{% for teacher in filtered_teacher %}
+
+{{ teacher.cv }}  <!-- тут должна быть привязка к категории. -->
+
+{% endfor %}
+
+{% endblock %}

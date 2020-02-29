@@ -1,13 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-<h1>    HELOO</h1>
-<a href="{% url 'student_signup' %}"> Регистрация как студента</a>
-<br>
-<a href="{% url 'teacher_signup' %}"> Регистрация как репетитора</a>
-</body>
-</html>
+{% extends 'index.html' %}
+
+
+{% block content %}
+{% for category in object_list %}
+
+<div class="column1">
+
+
+				<a href=" {% url 'filter_teachers' category.id %}" class="button" style="width: 100px;" >{{category}}</a>
+		</div>
+
+{% endfor %}
+
+{% endblock %}
