@@ -4,10 +4,10 @@
 {% block content %}
 {% for category in object_list %}
 
-<div class="column1">
+<div class="column1" style="margin:40px;">
 
 
-				<a href=" {% url 'filter_teachers' category.id %}" class="button" style="width: 100px;" >{{category}}</a>
+				<a href=" {% url 'filter_teachers' category.id %}" class="button" style="width: 100px, float:center;" >{{category}}</a>
 		</div>
 
 {% endfor %}

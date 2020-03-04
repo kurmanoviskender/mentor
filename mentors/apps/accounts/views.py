@@ -1,22 +1,16 @@
 from django.contrib.auth import login
+from django.contrib.auth.views import LoginView
 from django.shortcuts import redirect, render
 from django.views.generic import CreateView, DetailView
 from django.views.generic.base import View
 
+
 from .forms import StudentSignUpForm, TeacherSignUpForm
-from .models import User, Teacher, Student
+from .models import User, Teacher, Student, Comment
 
 
 def index(request):
     return render(request, 'index.html')
-
-
-class SignUpView(CreateView):
-    model = User
-    template_name = 'accounts/signup.html'
-    fields= [
-
-    ]
 
 
 class StudentSignUpView(CreateView):
@@ -44,11 +38,30 @@ class TeacherSignUpView(CreateView):
         return super().get_context_data(**kwargs)
 
     def form_valid(self, form):
+        # cv = form.cleaned_data['CV']
+        # self.object = form.save(cv=cv)
+        # self.object.save()
         user = form.save()
         login(self.request, user)
         return redirect('categories')
 
 
+class MyLoginView(LoginView):
+    template_name = 'templates/accounts/login.html'
+
+
 class TeacherDetailView(DetailView):
     model = Teacher
     template_name = 'accounts/teacher_detail.html'
+
+
+class AddCommentView(CreateView):
+    model = Comment
+    template_name = 'accounts/add_comment.html'
+
+    # fields = [
+    #      'name', 'email', 'body',
+    # ]
+    fields = '__all__'
+
+

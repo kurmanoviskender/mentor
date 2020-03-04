@@ -13,6 +13,11 @@ class CategoriesListView(ListView):
 #     model = Teacher
 #     template_name = 'categories/filter_teachers.html'
 
+
+class AllTeachersView(ListView):
+    model = Teacher
+    template_name = 'categories/all_teachers.html'
+
 def filter_by_cat(request, pk):
     filtered_cat = Category.objects.get(pk=pk)
     filtered_teacher = Teacher.objects.filter(category=filtered_cat)

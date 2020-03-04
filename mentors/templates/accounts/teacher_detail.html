@@ -3,7 +3,24 @@
 
 {% block content %}
 
-{{ object }} <br>
-{{ object.cv }}<br>
-{{ object.category }}<br>
+<div class="card mb-3" style="max-width: 540px;">
+  <div class="row no-gutters">
+    <div class="col-md-4">
+      <img src="static/images/avatar.png" class="card-img" alt="">
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h5 class="card-title"> <a href ="{% url 'teacher_detail' teacher.pk %}"> {{ object.user }} </a></h5>
+        <p class="card-text">{{ object.cv  }}</p>
+        {% for category in object.category.all %}
+        <p class="card-text"><small class="text-muted">{{ category }}</small></p>
+        {% endfor %}
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<p> <a href="{% url 'add_comment' object.pk %}"> Leave your comment here </a></p>
+
 {% endblock %}

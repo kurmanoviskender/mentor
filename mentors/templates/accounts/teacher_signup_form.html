@@ -1,16 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-asfsdf
+{% extends 'index.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
 <form action="" method="post">
+    <h2>Signup form</h2>
     {% csrf_token %}
-    {{ form.as_p }}
+    {{ form|crispy }}
 
 <button type ="submit"> Signup</button>
 </form>
-</body>
-</html>
+
+{% endblock %}

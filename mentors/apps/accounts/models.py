@@ -1,6 +1,7 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 from apps.categories.models import Category
+from django.urls import reverse
 
 
 class User(AbstractUser):
@@ -9,7 +10,8 @@ class User(AbstractUser):
     is_teacher = models.BooleanField(default=False)
 
     def __str__(self):
-        return f'{self.id}'
+        return f'{self.username}'
+
 class Student(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
 
@@ -19,15 +21,18 @@ class Student(models.Model):
 
 class Teacher(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
-    cv = models.TextField( default='CV')
-    category = models.ManyToManyField(Category)
+    cv = models.TextField(default='CV')
+    category = models.ManyToManyField(Category, related_name='teacher_category')
 
     def __str__(self):
         return f'teacher {self.user}'
 
+    def get_absolute_url(self):
+        return reverse('teacher_detail', args=[self.id])
+
 
 class Comment(models.Model):
-    teacher = models.ForeignKey(User, on_delete=models.CASCADE, related_name='comments')
+    teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE, related_name='comments')
     name = models.CharField(max_length=80)
     email = models.EmailField()
     body = models.TextField()

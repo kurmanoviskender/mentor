@@ -55,7 +55,8 @@
 	.container
 	{
 		margin: 0px auto;
-		width: 1200px;
+		width: auto;
+
 	}
 	
 
@@ -322,7 +323,8 @@
 	{
 		overflow: hidden;
 		padding: 5em 0em;
-		background: #B03500 url(images/img-bg.jpg) repeat;
+		background: #D0E2EC;
+		height: 400px;
 	}
 
 	#header
@@ -336,12 +338,12 @@
 	#logo
 	{   height: 25px;
 		padding: 5em 0em;
-		text-align: left;
+		text-align: center;
 	}
 	
 	#logo h1
 	{
-		font-size: 10em;
+		font-size: 6em;
 	}
 	
 	#logo a
@@ -526,20 +528,20 @@
 		border-top: 1px solid rgba(255,255,255,0.08);
 	}
 	
-	#copyright p
+	#copyright
 	{
 		letter-spacing: 0.20em;
 		text-align: center;
 		text-transform: uppercase;
 		font-size: 0.80em;
-		color: rgba(255,255,255,0.3);
+		color: black;
 	}
 	
-	#copyright a
+	.copyright-class>p>a
 	{
 		text-decoration: none;
-		color: rgba(255,255,255,0.6);
-	}
+		color: rgba(19, 18, 18, 0.6) !important;
+	}f
 
 /*********************************************************************************/
 /* Newsletter                                                                    */
