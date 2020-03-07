@@ -26,7 +26,7 @@ admin.site.register(Student)
 
 @admin.register(Comment)
 class CommentAdmin(admin.ModelAdmin):
-    list_display = ('name', 'body', 'teacher', 'created_on', 'active')
+    list_display = ('author', 'body', 'teacher', 'created_on', 'active')
     list_filter = ('active', 'created_on')
     search_fields = ('name', 'email', 'body')
     actions = ['approve_comments']

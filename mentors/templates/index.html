@@ -23,6 +23,9 @@
 				<li class="current_page_item"><a href="{% url 'categories' %}" accesskey="1" title="">Categories</a></li>
 				<li><a href="{% url 'all_teachers' %}" accesskey="2" title="">Mentors</a></li>
 				{% if user.is_authenticated %}
+				{% if user.is_teacher %}
+					<li><a href="{% url 'teacher_detail' user.teacher_user.pk %}"  title="">Profile</a></li>
+				{% endif %}
 				<li><a href="{% url 'logout' %}" accesskey="3" title="">Logout</a></li>
 				{% else %}
 				<li><a href="{% url 'login' %}" accesskey="3" title="">Login </a></li>

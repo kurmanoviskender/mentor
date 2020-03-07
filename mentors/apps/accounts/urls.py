@@ -1,7 +1,6 @@
 from django.urls import include, path
 
-from .views import StudentSignUpView, TeacherSignUpView, TeacherDetailView, MyLoginView,  AddCommentView
-
+from .views import StudentSignUpView, TeacherSignUpView, TeacherDetailView, MyLoginView
 from django.contrib.auth import views as auth_views
 
 
@@ -11,6 +10,6 @@ urlpatterns = [
     path('signup/student/', StudentSignUpView.as_view(), name='student_signup'),
     path('signup/teacher/', TeacherSignUpView.as_view(), name='teacher_signup'),
     path('teacher/<int:pk>/', TeacherDetailView.as_view(), name ='teacher_detail'),
-    path('teacher/<int:pk>/comment/', AddCommentView.as_view(), name='add_comment'),
+    # path('teacher/<int:pk>/comment/', AddCommentView.as_view(), name='add_comment'),
 
 ]

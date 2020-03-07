@@ -12,6 +12,7 @@ class User(AbstractUser):
     def __str__(self):
         return f'{self.username}'
 
+
 class Student(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
 
@@ -20,7 +21,7 @@ class Student(models.Model):
 
 
 class Teacher(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True, related_name='teacher_user')
     cv = models.TextField(default='CV')
     category = models.ManyToManyField(Category, related_name='teacher_category')
 
@@ -32,10 +33,9 @@ class Teacher(models.Model):
 
 
 class Comment(models.Model):
-    teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE, related_name='comments')
-    name = models.CharField(max_length=80)
-    email = models.EmailField()
-    body = models.TextField()
+    teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE, related_name='teacher_comments', null=True)
+    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='comments', null=True)
+    body = models.TextField(max_length=500)
     created_on = models.DateTimeField(auto_now_add=True)
     active = models.BooleanField(default=False)
 
@@ -43,5 +43,5 @@ class Comment(models.Model):
         ordering = ['created_on']
 
     def __str__(self):
-        return 'Comment {} by {}'.format(self.body, self.name)
+        return 'Comment {} by {}'.format(self.body, self.author)
 

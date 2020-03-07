@@ -1,11 +1,11 @@
 from django.contrib.auth import login
 from django.contrib.auth.views import LoginView
 from django.shortcuts import redirect, render
-from django.views.generic import CreateView, DetailView
+from django.urls import reverse_lazy
+from django.views.generic import CreateView, DetailView, FormView
 from django.views.generic.base import View
 
-
-from .forms import StudentSignUpForm, TeacherSignUpForm
+from .forms import StudentSignUpForm, TeacherSignUpForm, CommentForm
 from .models import User, Teacher, Student, Comment
 
 
@@ -50,18 +50,27 @@ class MyLoginView(LoginView):
     template_name = 'templates/accounts/login.html'
 
 
-class TeacherDetailView(DetailView):
+class TeacherDetailView(FormView, DetailView):
     model = Teacher
     template_name = 'accounts/teacher_detail.html'
+    form_class = CommentForm
+    def form_valid(self, form):
+        form = form.save(commit= False)
+        print('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
+        form.teacher = Teacher.objects.get(pk=self.kwargs['pk'])
+        print(form.teacher)
+        form.author = self.request.user
+        print(form.author)
+        form.save()
+        return super(TeacherDetailView, self).form_valid(form)
+
+    def get_success_url(self):
+        return reverse_lazy('teacher_detail', kwargs={'pk':self.kwargs['pk']})
 
 
-class AddCommentView(CreateView):
-    model = Comment
-    template_name = 'accounts/add_comment.html'
 
-    # fields = [
-    #      'name', 'email', 'body',
-    # ]
-    fields = '__all__'
+
+
+
 
 
