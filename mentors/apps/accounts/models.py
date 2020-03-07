@@ -24,6 +24,7 @@ class Teacher(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True, related_name='teacher_user')
     cv = models.TextField(default='CV')
     category = models.ManyToManyField(Category, related_name='teacher_category')
+    avatar = models.FileField(default='avatar')
 
     def __str__(self):
         return f'teacher {self.user}'

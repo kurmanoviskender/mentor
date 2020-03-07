@@ -56,11 +56,8 @@ class TeacherDetailView(FormView, DetailView):
     form_class = CommentForm
     def form_valid(self, form):
         form = form.save(commit= False)
-        print('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
         form.teacher = Teacher.objects.get(pk=self.kwargs['pk'])
-        print(form.teacher)
         form.author = self.request.user
-        print(form.author)
         form.save()
         return super(TeacherDetailView, self).form_valid(form)
 

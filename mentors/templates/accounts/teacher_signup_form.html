@@ -3,7 +3,7 @@
 
 {% block content %}
 
-<form action="" method="post">
+<form action="" method="post" enctype="multipart/form-data">
     <h2>Signup form</h2>
     {% csrf_token %}
     {{ form|crispy }}

@@ -28,6 +28,7 @@ class TeacherSignUpForm(UserCreationForm):
         required=True
     )
     CV = forms.CharField(widget=forms.Textarea)
+    avatar = forms.FileField()
 
     class Meta(UserCreationForm.Meta):
         model = User
@@ -38,9 +39,11 @@ class TeacherSignUpForm(UserCreationForm):
         user.is_teacher = True
         if commit:
             user.save()
+            print(self.cleaned_data)
             teacher = Teacher.objects.create(user=user)
             teacher.category.add(*self.cleaned_data.get('category'))
             teacher.cv = self.cleaned_data.get('CV')
+            teacher.avatar = self.cleaned_data.get('avatar')
             teacher.save()
         return user
 
